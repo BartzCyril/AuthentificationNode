@@ -2,6 +2,8 @@
 
 > Plateforme de blogging construite autour de l'authentification : connexion classique ou via Google / Discord, double authentification obligatoire pour publier, sessions JWT multi-appareils révocables et service d'images sécurisé par OAuth2.
 
+🔗 **Démo en ligne** : [https://auth.qota7916.odns.fr](https://auth.qota7916.odns.fr) (connexion Google / Discord désactivée sur la démo)
+
 ![React](https://img.shields.io/badge/React-20232A?logo=react&logoColor=61DAFB)
 ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white)
 ![Node.js](https://img.shields.io/badge/Node.js-339933?logo=nodedotjs&logoColor=white)
