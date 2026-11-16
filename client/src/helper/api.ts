@@ -26,7 +26,7 @@ const api = async (method: 'POST' | 'GET' | 'PATCH' | 'DELETE', action: string, 
         payload.body = JSON.stringify(body);
     }
 
-    const response = await fetch(`http://localhost:3000/${action}${params}`, payload); // Envoi de la requête fetch
+    const response = await fetch(`${import.meta.env.VITE_API_URL ?? "http://localhost:3000"}/${action}${params}`, payload); // Envoi de la requête fetch
     const responseJson = await response.json(); // Conversion de la réponse en JSON
     if (response.status === 200 || response.status === 201) { // Vérification du statut de la réponse
         return responseJson; // Retourne la réponse JSON si le statut est 200 ou 201

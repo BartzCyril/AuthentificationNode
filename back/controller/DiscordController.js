@@ -62,16 +62,16 @@ class DiscordController {
 
     discordCallback() { // Méthode pour définir la route de callback Discord OAuth
         this.app.get('/discord/callback',
-            passport.authenticate('discord', { failureRedirect: 'http://localhost:5173', session: false }),
+            passport.authenticate('discord', { failureRedirect: (process.env.FRONT_ORIGIN || 'http://localhost:5173'), session: false }),
             function (req, res) { // Fonction de redirection après authentification
                 if (req.user) {
                     const token = sign({
                         register: req.user.register,
                         email: req.user.email
                     }, process.env.SECRET_KEY, { expiresIn: '1h' });
-                    res.redirect("http://localhost:5173/login?token=" + token);
+                    res.redirect((process.env.FRONT_ORIGIN || "http://localhost:5173") + "/login?token=" + token);
                 } else {
-                    res.redirect("http://localhost:5173");
+                    res.redirect((process.env.FRONT_ORIGIN || "http://localhost:5173"));
                 }
             });
     }

@@ -53,7 +53,7 @@ const article = {
             const articles = response.message;
 
             const fetchPromises = articles.map(async (article: Article) => {
-                const imageResponse = await fetch(`http://localhost:3001/image?articleId=${article.id}`, {
+                const imageResponse = await fetch(`${import.meta.env.VITE_IMAGE_URL ?? 'http://localhost:3001'}/image?articleId=${article.id}`, {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json"
@@ -110,14 +110,14 @@ const article = {
         }
         verify()
             .then(async () => {
-                fetch('http://localhost:3000/accountId?email=' + encodeURI(email),{
+                fetch((import.meta.env.VITE_API_URL ?? 'http://localhost:3000') + '/accountId?email=' + encodeURI(email),{
                     method: 'GET',
                     headers: {
                         "Content-Type": "application/json"
                     }
                 }).then((response) => response.json())
                     .then((response) => {
-                        fetch('http://localhost:3002/oauth/token', {
+                        fetch((import.meta.env.VITE_OAUTH_URL ?? 'http://localhost:3002') + '/oauth/token', {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/x-www-form-urlencoded',
@@ -141,7 +141,7 @@ const article = {
                                         formData.append("files", file);
                                         formData.append("articleId", responseArticle.id); // Ajoutez les autres champs ici
                                         formData.append("token", accessToken);
-                                        fetch("http://localhost:3001/upload", {
+                                        fetch((import.meta.env.VITE_IMAGE_URL ?? "http://localhost:3001") + "/upload", {
                                             method: "POST",
                                             body: formData, // Le corps de la requête est le FormData
                                             headers: {

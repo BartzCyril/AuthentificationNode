@@ -7,7 +7,7 @@ const app = express();
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(cors({credentials: true, origin: "http://localhost:5173" /* pour le site en dev */ || "*" /* pour PostMan */}))
+app.use(cors({credentials: true, origin: process.env.FRONT_ORIGIN || "http://localhost:5173"}))
 
 const db = new sqlite3.Database('token.db', (err) => {
     if (err) {
@@ -125,6 +125,6 @@ app.post('/verify', (req, res) => {
         });
 });
 
-app.listen(3002, () => {
+app.listen(process.env.PORT || 3002, () => {
     console.log('Le serveur Oauth2 écoute sur le port 3002');
 });

@@ -171,11 +171,11 @@ const Login = () => {
     }, []);
 
     const discordLogin = () => {
-        window.open("http://localhost:3000/discord", "_self") // Redirection vers la connexion Discord
+        window.open((import.meta.env.VITE_API_URL ?? "http://localhost:3000") + "/discord", "_self") // Redirection vers la connexion Discord
     }
 
     const googleLogin = () => {
-        window.open("http://localhost:3000/google", "_self") // Redirection vers la connexion Google
+        window.open((import.meta.env.VITE_API_URL ?? "http://localhost:3000") + "/google", "_self") // Redirection vers la connexion Google
     }
 
     const handleEmailWrapper = (newEmail: string) => handleEmail(newEmail, setError, setEmail, error);

@@ -10,7 +10,7 @@ const mime = require('mime-types');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(cors({credentials: true, origin: "http://localhost:5173" /* pour le site en dev */ || "*" /* pour PostMan */}))
+app.use(cors({credentials: true, origin: process.env.FRONT_ORIGIN || "http://localhost:5173"}))
 
 const db = new sqlite3.Database('image.db', (err) => {
     if (err) {
@@ -78,7 +78,7 @@ app.post('/upload', (req, res) => {
         const file = files.files[0];
         const uploadPath = path.join(__dirname, 'files', file.originalFilename);
 
-        fetch('http://localhost:3002/verify', {
+        fetch((process.env.OAUTH_URL || 'http://localhost:3002') + '/verify', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -116,6 +116,6 @@ app.post('/upload', (req, res) => {
 
 app.use('/files', express.static(path.join(__dirname, 'files')));
 
-app.listen(3001, () => {
+app.listen(process.env.PORT || 3001, () => {
     console.log("Le serveur image écoute sur le port 3001");
 });
