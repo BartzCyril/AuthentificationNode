@@ -1,5 +1,5 @@
 const DiscordStrategy = require('passport-discord').Strategy;
-const scopes = ['identify', 'email', 'guilds', 'guilds.join'];
+const scopes = ['identify', 'email'];
 const passport = require('passport');
 const {sign} = require("jsonwebtoken");
 

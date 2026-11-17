@@ -180,7 +180,8 @@ class AccountController {
                     } else {
                         const row = getPasswordAndMfaSecret.message.password; // Récupération du mot de passe haché
 
-                        const compare = await bcrypt.compare(password, row.toString()); // Comparaison des mots de passe
+                        // Comptes sans mot de passe (Google/Discord, démo) : refus propre au lieu d'un crash sur null
+                        const compare = row ? await bcrypt.compare(password, row.toString()) : false;
                         if (compare !== true) { // Si le mot de passe est incorrect
                             res.status(401).send({ // Envoi d'une réponse d'erreur
                                 status: "Erreur",

@@ -46,6 +46,7 @@ if (process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET) new Google
 const oauthController = new OauthController(app, account, token);
 const article = new Article(db);
 const articleController = new ArticleController(app, account, blog, article);
+require('./helper/seed')(db);
 
 // Serve the built client (client/dist) with SPA fallback for client routes (GET requests not handled by the API)
 const path = require('path');
